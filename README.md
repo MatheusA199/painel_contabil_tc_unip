@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Sistema de Gestão Contábil para Microempreendedores
 
-## Getting Started
+![Status do Projeto](https://img.shields.io/badge/Status-Finalizado-brightgreen)
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-blue)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC)
 
-First, run the development server:
+> Uma solução web completa para otimizar o gerenciamento de estoques, custos e vendas de pequenos negócios, fundamentada nos princípios contábeis do CPC 16.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🖼️ Visão Geral do Projeto
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Este projeto foi desenvolvido como Trabalho de Curso (TC) com o objetivo de democratizar o acesso a ferramentas de gestão contábil. Focado na realidade de microempreendedores (como vendedores autônomos de alimentos), o sistema substitui anotações manuais e "achismos" por dados precisos.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Diferencial:** O sistema não apenas registra dados, mas aplica lógica contábil real (como o método de custeio e validação de estoque) para gerar uma **Demonstração do Resultado do Exercício (DRE)** automática e em tempo real.
 
-## Learn More
+### 📸 Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+| Painel Financeiro (DRE) | Controle de Estoque |
+|:---:|:---:|
+| ![DRE](https://via.placeholder.com/400x200?text=Insira+Print+da+DRE+Aqui) | ![Estoque](https://via.placeholder.com/400x200?text=Insira+Print+do+Estoque+Aqui) |
+| *Visão clara do lucro líquido real.* | *Saldo atualizado automaticamente.* |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Histórico de Vendas | Registro de Produção |
+|:---:|:---:|
+| ![Vendas](https://via.placeholder.com/400x200?text=Insira+Print+Vendas+Aqui) | ![Produção](https://via.placeholder.com/400x200?text=Insira+Print+Producao+Aqui) |
+| *Detalhamento de todas as transações.* | *Baixa automática de insumos.* |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## ✨ Funcionalidades Principais
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **🔐 Autenticação & Multi-tenancy:** Sistema seguro onde cada usuário visualiza apenas os seus próprios dados.
+* **📦 Gestão de Cadastros:**
+    * Insumos (Matéria-prima com unidades de medida personalizadas).
+    * Produtos Finais (Com definição de preço de venda e rendimento por receita).
+    * Receitas Dinâmicas (Associação de múltiplos insumos a um produto).
+* **🏭 Controle Operacional:**
+    * **Registro de Compras:** Entrada automática no estoque de insumos.
+    * **Registro de Produção Inteligente:** Valida se há estoque suficiente de *todos* os ingredientes antes de permitir a produção. Realiza a baixa dos insumos e a entrada do produto acabado automaticamente.
+    * **Registro de Vendas:** Cálculo automático de faturamento e baixa de estoque de produtos.
+    * **Controle de Perdas:** Registro tipificado (vencimento, consumo próprio) para apuração correta de despesas.
+* **📈 Inteligência de Negócio:**
+    * **DRE em Tempo Real:** Relatório financeiro com Receita Bruta, CMV (Custo da Mercadoria Vendida), Lucro Bruto, Despesas e Lucro Líquido.
+    * **Cálculo de Custo Preciso:** Utilização de algoritmos para apurar o custo unitário real de cada produto baseado no histórico de compras de insumos.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+O projeto foi construído com uma stack moderna, focada em performance e escalabilidade:
+
+* **[Next.js 14 (App Router)](https://nextjs.org/):** Framework React full-stack, utilizando *Server Actions* para toda a lógica de backend e *React Server Components* para máxima eficiência.
+* **[Prisma ORM](https://www.prisma.io/):** Para interação tipada e segura com o banco de dados.
+* **[PostgreSQL](https://www.postgresql.org/):** Banco de dados relacional robusto (hospedado na Vercel/Neon durante o desenvolvimento).
+* **[NextAuth.js](https://next-auth.js.org/):** Sistema completo de autenticação e gerenciamento de sessões.
+* **[Tailwind CSS](https://tailwindcss.com/) & [HeroUI](https://www.heroui.com/):** Para estilização responsiva e componentes de interface modernos.
+* **Zod:** Para validação robusta de dados no backend.
+
+---
+
+## 🗄️ Modelagem do Banco de Dados
+
+A estrutura relacional foi projetada para garantir a integridade das transações e suportar o método de custeio.
+
+```mermaid
+erDiagram
+    User ||--o{ Insumo : "cadastra"
+    User ||--o{ Produto : "cadastra"
+    User ||--o{ CompraInsumo : "registra"
+    User ||--o{ Producao : "realiza"
+    User ||--o{ Venda : "realiza"
+    User ||--o{ Perda : "registra"
+    User ||--o{ EstoqueMovimentacao : "audita"
+
+    Insumo ||--o{ ReceitaItem : "compõe"
+    Produto ||--o{ ReceitaItem : "possui"
+    
+    Insumo ||--o{ CompraInsumo : "é comprado"
+    Produto ||--o{ Producao : "é fabricado"
+    Produto ||--o{ Venda : "é vendido"
+    
+    Insumo }o--o{ EstoqueMovimentacao : "movimenta"
+    Produto }o--o{ EstoqueMovimentacao : "movimenta"
