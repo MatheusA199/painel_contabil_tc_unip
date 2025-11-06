@@ -20,12 +20,12 @@ Este projeto foi desenvolvido como Trabalho de Curso (TC) com o objetivo de demo
 
 | Painel Financeiro (DRE) | Controle de Estoque |
 |:---:|:---:|
-| ![DRE](./.github/screenshots/tela_inicial.png) | ![Estoque](./.github/screenshots/controle_estoque.png) |
+| ![DRE](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/3#issue-3596865487) | ![Estoque](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/2#issue-3596863884) |
 | *Visão clara do lucro líquido real.* | *Saldo atualizado automaticamente.* |
 
 | Histórico de Vendas | Registro de Produção |
 |:---:|:---:|
-| ![Vendas](./.github/screenshots/historico_venda.png) | ![Produção](./.github/screenshots/registro_producao.png) |
+| ![Vendas](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/1#issue-3596862991) | ![Produção](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/4#issue-3596866109) |
 | *Detalhamento de todas as transações.* | *Baixa automática de insumos.* |
 
 ---
