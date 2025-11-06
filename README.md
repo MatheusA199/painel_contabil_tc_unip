@@ -20,12 +20,12 @@ Este projeto foi desenvolvido como Trabalho de Curso (TC) com o objetivo de demo
 
 | Painel Financeiro (DRE) | Controle de Estoque |
 |:---:|:---:|
-| ![DRE](https://via.placeholder.com/400x200?text=Insira+Print+da+DRE+Aqui) | ![Estoque](https://via.placeholder.com/400x200?text=Insira+Print+do+Estoque+Aqui) |
+| ![DRE](./.git/screenshots/tela_inicial.png) | ![Estoque](./.git/screenshots/controle_estoque.png) |
 | *Visão clara do lucro líquido real.* | *Saldo atualizado automaticamente.* |
 
 | Histórico de Vendas | Registro de Produção |
 |:---:|:---:|
-| ![Vendas](https://via.placeholder.com/400x200?text=Insira+Print+Vendas+Aqui) | ![Produção](https://via.placeholder.com/400x200?text=Insira+Print+Producao+Aqui) |
+| ![Vendas](./.git/screenshots/historico_venda.png) | ![Produção](./.git/screenshots/registro_producao.png) |
 | *Detalhamento de todas as transações.* | *Baixa automática de insumos.* |
 
 ---
