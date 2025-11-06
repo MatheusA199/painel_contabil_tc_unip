@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  password  String
+  
+  // Relações para todos os dados que pertencem ao usuário
+  insumos     Insumo[]
+  produtos    Produto[]
+  compras     CompraInsumo[]
+  vendas      Venda[]
+  producoes   Producao[]
+  perdas      Perda[]
+  movimentacoes EstoqueMovimentacao[]
+}
+
+model Insumo {
+  id              Int      @id @default(autoincrement())
+  nome            String
+  unidadeDeMedida String
+  precoAtual      Decimal  @db.Decimal(10, 2) @default(0.00)
+
+  // RELAÇÃO COM O USUÁRIO (NOVA)
+  userId          Int      @default(1)
+  user            User     @relation(fields: [userId], references: [id])
+
+  // Garante que o nome do insumo seja único POR USUÁRIO
+  @@unique([userId, nome])
+
+  receitaItems    ReceitaItem[]
+  compras         CompraInsumo[]
+  perdas          Perda[]
+  movimentacoes   EstoqueMovimentacao[]
+}
+
+model Produto {
+  id                Int      @id @default(autoincrement())
+  nome              String
+  precoVenda        Decimal  @db.Decimal(10, 2)
+  rendimentoReceita Int      @default(1)
+
+  // RELAÇÃO COM O USUÁRIO (NOVA)
+  userId            Int      @default(1)
+  user              User     @relation(fields: [userId], references: [id])
+  
+  // Garante que o nome do produto seja único POR USUÁRIO
+  @@unique([userId, nome])
+
+  receitaItems  ReceitaItem[]
+  producoes     Producao[]
+  vendas        Venda[]
+  perdas        Perda[]
+  movimentacoes EstoqueMovimentacao[]
+}
+
+model ReceitaItem {
+  produtoId  Int
+  insumoId   Int
+  quantidade Decimal @db.Decimal(10, 3)
+  produto    Produto @relation(fields: [produtoId], references: [id])
+  insumo     Insumo  @relation(fields: [insumoId], references: [id])
+
+  @@id([produtoId, insumoId])
+}
+
+model CompraInsumo {
+  id                 Int      @id @default(autoincrement())
+  insumoId           Int
+  quantidadeComprada Decimal  @db.Decimal(10, 3)
+  custoTotal         Decimal  @db.Decimal(10, 2)
+  precoUnitario      Decimal  @db.Decimal(10, 2)
+  dataCompra         DateTime @default(now())
+  insumo             Insumo   @relation(fields: [insumoId], references: [id])
+  userId             Int
+  user               User     @relation(fields: [userId], references: [id])
+}
+
+model Producao {
+  id                  Int      @id @default(autoincrement())
+  produtoId           Int
+  quantidadeProduzida Int
+  dataProducao        DateTime @default(now())
+  lote                String?
+  produto             Produto  @relation(fields: [produtoId], references: [id])
+  userId              Int
+  user                User     @relation(fields: [userId], references: [id])
+}
+
+model Venda {
+  id                Int      @id @default(autoincrement())
+  produtoId         Int
+  quantidadeVendida Int
+  valorTotalVenda   Decimal  @db.Decimal(10, 2)
+  dataVenda         DateTime @default(now())
+  produto           Produto  @relation(fields: [produtoId], references: [id])
+  userId            Int
+  user              User     @relation(fields: [userId], references: [id])
+  lote              String?
+}
+
+model Perda {
+  id         Int       @id @default(autoincrement())
+  tipo       TipoPerda
+  motivo     String
+  quantidade Decimal   @db.Decimal(10, 3)
+  dataPerda  DateTime  @default(now())
+  insumoId   Int?
+  produtoId  Int?
+  insumo     Insumo?   @relation(fields: [insumoId], references: [id])
+  produto    Produto?  @relation(fields: [produtoId], references: [id])
+  
+  // userId AGORA É OBRIGATÓRIO
+  userId     Int
+  user       User      @relation(fields: [userId], references: [id])
+}
+
+model EstoqueMovimentacao {
+  id          Int       @id @default(autoincrement())
+  tipo        TipoMov
+  produtoId   Int?
+  insumoId    Int?
+  quantidade  Decimal   @db.Decimal(10, 3)
+  descricao   String?
+  dataCriacao DateTime  @default(now())
+
+  // RELAÇÃO COM O USUÁRIO (NOVA E ESSENCIAL)
+  userId      Int       @default(1)
+  user        User      @relation(fields: [userId], references: [id])
+
+  produto     Produto?  @relation(fields: [produtoId], references: [id])
+  insumo      Insumo?   @relation(fields: [insumoId], references: [id])
+}
+
+enum TipoPerda {
+  INSUMO
+  PRODUTO
+}
+
+enum TipoMov {
+  ENTRADA
+  SAIDA
+  PERDA
+  AJUSTE
+}
