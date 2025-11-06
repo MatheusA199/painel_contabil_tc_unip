@@ -20,7 +20,7 @@ Este projeto foi desenvolvido como Trabalho de Curso (TC) com o objetivo de demo
 
 | Painel Financeiro (DRE) | Controle de Estoque |
 |:---:|:---:|
-| ![DRE](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/3#issue-3596865487) | ![Estoque](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/2#issue-3596863884) |
+| ![DRE]([https://github.com/MatheusA199/painel_contabil_tc_unip/issues/3#issue-3596865487](https://private-user-images.githubusercontent.com/106098490/510915557-aabe4751-ddfc-408f-ad51-7c1f5d103a92.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjI0NTE2NDUsIm5iZiI6MTc2MjQ1MTM0NSwicGF0aCI6Ii8xMDYwOTg0OTAvNTEwOTE1NTU3LWFhYmU0NzUxLWRkZmMtNDA4Zi1hZDUxLTdjMWY1ZDEwM2E5Mi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUxMTA2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MTEwNlQxNzQ5MDVaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1kNTNiYmUyYjBlZGYyNmY2YmM2NTRhMjU2Y2Q2MzNhNjljYzcyMGNmZWQ1NmI5MDQyMmM4ZWNjN2UyYzdhYjMyJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.TEcGxG1oALpt0FjcWL9C5h4vJJ8ebNyZJUHMVsj_JIU)) | ![Estoque](https://github.com/MatheusA199/painel_contabil_tc_unip/issues/2#issue-3596863884) |
 | *Visão clara do lucro líquido real.* | *Saldo atualizado automaticamente.* |
 
 | Histórico de Vendas | Registro de Produção |
